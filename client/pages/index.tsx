@@ -3,6 +3,7 @@ import { useRef } from "react";
 import Message from "../container/Message";
 import Rooms from "../container/Rooms";
 import { useScoket } from "../context/Socket.context";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const { socket, username, setUsername } = useScoket();
@@ -23,18 +24,24 @@ const Home: NextPage = () => {
       <h2>Socket id</h2>
       {socket.id}
       {!username && (
-        <div>
-          <input
-            ref={usernameRef}
-            type="text"
-            placeholder="Enter your username"
-          />
-          <button onClick={handleSetUserName}>Submit</button>
+        <div className={styles.usernameWrapper}>
+          <div className={styles.usernameInner}>
+            <input
+              ref={usernameRef}
+              type="text"
+              placeholder="Enter your username"
+            />
+            <button onClick={handleSetUserName}>Submit</button>
+          </div>
         </div>
       )}
 
-      <Rooms />
-      <Message />
+      {username && (
+        <div className={styles.container}>
+          <Rooms />
+          <Message />
+        </div>
+      )}
     </div>
   );
 };
