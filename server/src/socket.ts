@@ -8,3 +8,5 @@ function socket({ io }: { io: Server }) {
     logger.info(`User connected ${socket.id}`);
   });
 }
+
+export default socket;
